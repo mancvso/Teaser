@@ -1,9 +1,12 @@
 package com.datactil.Teaser;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.VideoView;
 
 public class Main extends Activity {
@@ -16,7 +19,7 @@ public class Main extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         videoView =(VideoView)findViewById(R.id.video);
-        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.loop));
+        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.loop500 ));
         //loop
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
@@ -24,6 +27,15 @@ public class Main extends Activity {
                 mp.setLooping(true);
             }
         });
+        final Button button = (Button) findViewById(R.id.suscribe);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.datactil.com"));
+                startActivity(browse);
+            }
+        });
+
+        //TODO: Add fallback to png
         videoView.start();
         videoView.requestFocus();
     }
